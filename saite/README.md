@@ -14,6 +14,7 @@ D* atabase: PostgreSQL для хранения данных.
 * Docker: Для запуска приложения в контейнерах.
 
 ## 1. Структура проекта
+
 ```bash
 project/
 │
@@ -40,16 +41,20 @@ project/
 ├── docker-compose.yml
 └── README.md
 ```
+
 ### 2. Backend (Node.js + Express.js)
 
 #### 2.1. Установка зависимостей
+
 ```bash
 cd backend
 npm init -y
 npm install express pg sequelize jsonwebtoken bcryptjs cors
 npm install --save-dev nodemon
 ```
+
 #### 2.2. Настройка Express.js
+
 ```javascript
 // backend/src/index.js
 const express = require('express');
@@ -133,8 +138,11 @@ const register = async (req, res) => {
 
 module.exports = { login, register };
 ```
+
 ### 3. Frontend (React.js + Tailwind CSS)
+
 #### 3.1. Установка зависимостей
+
 ```bash
 cd frontend
 npx create-react-app .
@@ -142,7 +150,9 @@ npm install axios react-router-dom
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
+
 #### 3.2. Настройка Tailwind CSS
+
 ```javascript
 // frontend/tailwind.config.js
 module.exports = {
@@ -176,8 +186,11 @@ const Navbar = () => {
 
 export default Navbar;
 ```
+
 ### 4. Docker и Docker Compose
-#### 4.1. Dockerfile для Backend
+
+#### 4.1. `Dockerfile` для Backend
+
 ```Dockerfile
 # backend/Dockerfile
 FROM node:14
@@ -191,7 +204,9 @@ COPY . .
 
 CMD ["npm", "start"]
 ```
+
 #### 4.2. Dockerfile для Frontend
+
 ```Dockerfile
 # frontend/Dockerfile
 FROM node:14
@@ -205,7 +220,9 @@ COPY . .
 
 CMD ["npm", "start"]
 ```
-#### 4.3. docker-compose.yml
+
+#### 4.3. `docker-compose.yml`
+
 ```yaml
 version: '3.8'
 
@@ -241,17 +258,23 @@ services:
 volumes:
   postgres_data:
 ```
+
 ### 5. Запуск проекта
+
 ```bash
 docker-compose up --build
 ```
+
 ### 6. Валидация данных
+
 #### 6.1. Валидация на бэкенде
+
 Используйте библиотеку express-validator для валидации данных на сервере.
 
 ```bash
 npm install express-validator
 ```
+
 ```javascript
 // backend/src/routes/auth.js
 const { body, validationResult } = require('express-validator');
@@ -265,12 +288,15 @@ router.post(
   register
 );
 ```
+
 #### 6.2. Валидация на фронтенде
+
 Используйте библиотеку formik и yup для валидации форм.
 
 ```bash
 npm install formik yup
 ```
+
 ```javascript
 // frontend/src/components/RegisterForm.js
 import { useFormik } from 'formik';
@@ -354,5 +380,7 @@ const Table = () => {
 
 export default Table;
 ```
+
 ### Заключение
+
 Этот проект представляет собой базовую структуру для создания веб-приложения с авторизацией, административной панелью и динамическими таблицами. Вы можете расширить его функциональность, добавив больше валидаций, улучшив интерфейс и добавив дополнительные функции, такие как экспорт данных, пагинацию и т.д.
